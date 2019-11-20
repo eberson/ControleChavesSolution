@@ -1,4 +1,5 @@
 ﻿using ControleChaves.Application.Entities;
+using ControleChaves.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;

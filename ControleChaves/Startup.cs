@@ -11,6 +11,8 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using AutoMapper;
+using ControleChaves.Application.AutoMapper;
 
 namespace ControleChaves
 {
@@ -31,6 +33,7 @@ namespace ControleChaves
 
             services.AddSingleton(Configuration);
             services.AddTransient<IUserService, UserService>();
+            services.AddScoped<IUsuarioService, UsuarioService>();
             services.AddAuthentication(options =>
             {
                 options.DefaultAuthenticateScheme = CookieAuthenticationDefaults.AuthenticationScheme;
@@ -41,6 +44,8 @@ namespace ControleChaves
                 options.LoginPath = "/auth/login";
                 options.LogoutPath = "/auth/logout";
             });
+
+            services.RegisterMappings();
         }
 
         private static void UpdateDatabase(IApplicationBuilder app)

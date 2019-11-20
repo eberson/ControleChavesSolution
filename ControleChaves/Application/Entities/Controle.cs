@@ -10,6 +10,10 @@ namespace ControleChaves.Application.Entities
         public int Codigo { get; set; }
         public DateTime Retirada { get; set; }
         public DateTime Devolucao { get; set; }
+        public virtual Funcionario FuncionarioRetirada { get; set; }
+
+        public virtual Funcionario FuncionarioDevolucao { get; set; }
+
         public virtual Usuario UsuarioRetirada { get; set; }
 
         public virtual Usuario UsuarioDevolucao { get; set; }

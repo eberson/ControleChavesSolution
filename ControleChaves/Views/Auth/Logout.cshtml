@@ -3,12 +3,30 @@
     var url = ViewBag.ReturnUrl;
 }
 
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/login.css" />
+}
+
 <div class="row">
     <div class="col-md-12">
-        <h3>Tem certeza que deseja encerrar a sessão atual?</h3>
-        <form a method="post" asp-action="Logout">
-            <button type="submit" class="btn btn-lg btn-danger">Sim</button>
-            <a asp-action="Cancel" asp-route-returnUrl="@url" class="btn btn-lg btn-warning">Não</a>
-        </form>
+        <div class="wrapper fadeInDown">
+            <div id="formContent">
+                <!-- Tabs Titles -->
+                <!-- Icon -->
+                <div class="fadeIn first">
+                    <img src="~/images/logo.png" alt="Controle de Chaves" width=300 height=200 />
+                </div>
+
+                <h3>Tem certeza que deseja encerrar a sessão atual?</h3>
+
+                <!-- Login Form -->
+                <form asp-action="Logout" method="post">
+                    <button type="submit" class="btn btn-lg btn-danger fadeIn fourth">Sim</button>
+                    <a class="underlineHover fadeIn fifth" asp-action="Cancel" asp-route-returnUrl="@url" class="btn btn-lg btn-warning">Não</a>
+                </form>
+
+            </div>
+        </div>
     </div>
 </div>

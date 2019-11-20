@@ -12,6 +12,8 @@ namespace ControleChaves.Application.Database
         public DbSet<Usuario> Usuarios { get; set; }
         public DbSet<Localizacao> Localizacoes { get; set; }
         public DbSet<Chave> Chaves { get; set; }
+        public DbSet<Controle> Controles { get; set; }
+        public DbSet<Funcionario> Funcionarios { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -27,9 +29,17 @@ namespace ControleChaves.Application.Database
                 u.HasKey(e => e.ID);
                 u.Property(e => e.ID).ValueGeneratedOnAdd();
                 u.Property(e => e.Nome).IsRequired();
-                u.Property(e => e.Celular).IsRequired();
                 u.Property(e => e.Email).IsRequired();
                 u.Property(e => e.Senha).IsRequired();
+            });
+
+            modelBuilder.Entity<Funcionario>(f =>
+            {
+                f.HasKey(e => e.ID);
+                f.Property(e => e.ID).ValueGeneratedOnAdd();
+                f.Property(e => e.Nome).IsRequired();
+                f.Property(e => e.Celular).IsRequired();
+                f.Property(e => e.Email).IsRequired();
             });
 
             modelBuilder.Entity<Localizacao>(l =>
@@ -52,7 +62,9 @@ namespace ControleChaves.Application.Database
                c.HasKey(e => e.Codigo);
                c.Property(e => e.Retirada).HasDefaultValue(DateTime.Now);
                c.HasOne(e => e.UsuarioRetirada).WithMany(u => u.Retiradas).IsRequired();
-               c.HasOne(e => e.UsuarioDevolucao).WithMany(u => u.Devolucoes).IsRequired();
+               c.HasOne(e => e.UsuarioDevolucao).WithMany(u => u.Devolucoes);
+               c.HasOne(e => e.FuncionarioRetirada).WithMany(f => f.Retiradas).IsRequired();
+               c.HasOne(e => e.FuncionarioDevolucao).WithMany(f => f.Devolucoes);
                c.HasOne(e => e.Chave).WithMany(c => c.Movimentacoes).IsRequired();
            });
         }

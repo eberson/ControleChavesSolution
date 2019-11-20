@@ -53,7 +53,7 @@ namespace ControleChaves.Controllers
                     return RedirectToAction("Index", "Home");
                 }
 
-                ModelState.AddModelError("InvalidCredentials", "Invalid credentials.");
+                ModelState.AddModelError("InvalidCredentials", "Credenciais inválidas.");
             }
 
             return View(model);
