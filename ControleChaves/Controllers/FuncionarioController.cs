@@ -7,47 +7,51 @@ using ControleChaves.Application.Services;
 using ControleChaves.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace ControleChaves.Controllers
 {
-    public class UsuarioController : Controller
+    public class FuncionarioController : Controller
     {
-        private readonly IUsuarioService _usuarioService;
+        private readonly IFuncionarioService _funcionarioService;
         private readonly IMapper _mapper;
 
-        public UsuarioController(IUsuarioService usuarioService, IMapper mapper)
+        public FuncionarioController(IFuncionarioService funcionarioService, IMapper mapper)
         {
-            _usuarioService = usuarioService;
+            _funcionarioService = funcionarioService;
             _mapper = mapper;
         }
 
         [Authorize]
         public IActionResult Index()
         {
-            return View(_usuarioService.FindAll().Result);
+            return View(_funcionarioService.FindAll().Result);
         }
 
         [Authorize]
         public IActionResult Create()
         {
+            PrepareSelect();
             return View();
         }
 
         [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create(UsuarioViewModel vm)
+        public IActionResult Create(FuncionarioViewModel vm)
         {
+            PrepareSelect();
+
             if (!ModelState.IsValid) return View(vm);
 
-            var task = _usuarioService.Create(vm);
+            var task = _funcionarioService.Create(vm);
 
             if (task.IsCompletedSuccessfully)
                 return RedirectToAction("Index");
 
             if (task.IsFaulted)
             {
-                ModelState.AddModelError("ErrorSaving", "Erro ao salvar o usuário.");
+                ModelState.AddModelError("ErrorSaving", "Erro ao salvar o funcionário.");
             }
 
             return View(vm);
@@ -57,31 +61,45 @@ namespace ControleChaves.Controllers
         [HttpGet]
         public IActionResult Edit(int id)
         {
-            var vm = _usuarioService.Find(id).Result;
+            PrepareSelect();
+            var vm = _funcionarioService.Find(id).Result;
 
             if (vm == null)
             {
                 return NotFound();
             }
 
-            return View(_mapper.Map<EditUsuarioViewModel>(vm));
+            return View(vm);
+        }
+
+        private void PrepareSelect()
+        {
+            ViewBag.Funcoes = new[]
+            {
+                new SelectListItem(){ Value = "DIRETORIA", Text = "Diretoria"},
+                new SelectListItem(){ Value = "FUNCIONARIO", Text = "Funcionário"},
+                new SelectListItem(){ Value = "PROFESSOR", Text = "Professor"},
+                new SelectListItem(){ Value = "VIGILANTE", Text = "Vigilante"},
+            };
         }
 
         [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit(EditUsuarioViewModel vm)
+        public IActionResult Edit(FuncionarioViewModel vm)
         {
+            PrepareSelect();
+
             if (!ModelState.IsValid) return View(vm);
 
-            var task = _usuarioService.Update(_mapper.Map<UsuarioViewModel>(vm));
+            var task = _funcionarioService.Update(vm);
 
             if (task.IsCompletedSuccessfully)
                 return RedirectToAction("Index");
 
             if (task.IsFaulted)
             {
-                ModelState.AddModelError("ErrorSaving", "Erro editando usuário.");
+                ModelState.AddModelError("ErrorSaving", "Erro editando funcionário.");
             }
 
             return View(vm);
@@ -91,14 +109,14 @@ namespace ControleChaves.Controllers
         [HttpGet]
         public IActionResult Delete(int id)
         {
-            var vm = _usuarioService.Find(id).Result;
+            var vm = _funcionarioService.Find(id).Result;
 
             if (vm == null)
             {
                 return NotFound();
             }
 
-            return View(_mapper.Map<EditUsuarioViewModel>(vm));
+            return View(vm);
         }
 
         [Authorize]
@@ -106,25 +124,24 @@ namespace ControleChaves.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult DeleteConfirmed(int id)
         {
-            var task = _usuarioService.Remove(id);
+            var task = _funcionarioService.Remove(id);
 
             if (task.IsCompletedSuccessfully)
                 return RedirectToAction("Index");
 
             if (task.IsFaulted)
             {
-                ModelState.AddModelError("ErrorSaving", "Erro ao remover o usuário.");
+                ModelState.AddModelError("ErrorSaving", "Erro ao remover o funcionário.");
             }
 
-            var vm = _usuarioService.Find(id).Result;
+            var vm = _funcionarioService.Find(id).Result;
 
             if (vm == null)
             {
                 return NotFound();
             }
 
-            return View(_mapper.Map<EditUsuarioViewModel>(vm));
+            return View(vm);
         }
-
     }
 }

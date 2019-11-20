@@ -34,6 +34,7 @@ namespace ControleChaves
             services.AddSingleton(Configuration);
             services.AddTransient<IUserService, UserService>();
             services.AddScoped<IUsuarioService, UsuarioService>();
+            services.AddScoped<IFuncionarioService, FuncionarioService>();
             services.AddAuthentication(options =>
             {
                 options.DefaultAuthenticateScheme = CookieAuthenticationDefaults.AuthenticationScheme;

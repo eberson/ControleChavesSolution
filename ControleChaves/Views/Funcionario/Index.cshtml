@@ -1,0 +1,66 @@
+﻿@model IEnumerable<ControleChaves.Models.FuncionarioViewModel>
+
+@{
+    ViewData["Title"] = "Funcionários";
+}
+
+<div class="pb-2 mt-4 mb-5 border-bottom">
+    <h2>Funcionários</h2>
+</div>
+
+<p>
+    <a class="btn btn-primary" asp-action="Create">Novo Funcionário</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Nome)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Celular)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Email)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DataNascimento)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Funcao)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nome)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Celular)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DataNascimento)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Funcao)
+            </td>
+            <td>
+                @Html.ActionLink("Editar", "Edit", new { id=item.ID }, new { @class = "btn btn-secondary" }) |
+                @Html.ActionLink("Remover", "Delete", new { id=item.ID }, new { @class = "btn btn-danger" })
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

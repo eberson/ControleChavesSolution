@@ -16,6 +16,10 @@ namespace ControleChaves.Application.AutoMapper
                 .ForMember(u => u.Retiradas, opts => opts.Ignore())
                 .ForMember(u => u.Devolucoes, opts => opts.Ignore());
 
+            CreateMap<FuncionarioViewModel, Funcionario>()
+                .ForMember(f => f.Retiradas, opts => opts.Ignore())
+                .ForMember(f => f.Devolucoes, opts => opts.Ignore());
+
             CreateMap<EditUsuarioViewModel, UsuarioViewModel>()
                 .ForMember(u => u.Senha, opts => opts.Ignore());
         }

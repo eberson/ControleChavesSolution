@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ControleChaves.Application.Services
 {
-    public interface IUsuarioService : IBaseService<UsuarioViewModel, int>
+    public interface IFuncionarioService : IBaseService<FuncionarioViewModel, int>
     {
     }
 }

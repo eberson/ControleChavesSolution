@@ -1,14 +1,14 @@
-﻿@model ControleChaves.Models.EditUsuarioViewModel
+﻿@model ControleChaves.Models.FuncionarioViewModel
 
 @{
-    ViewData["Title"] = "Remoção de Usuário";
+    ViewData["Title"] = "Remoção de Funcionário";
 }
 
 <div class="pb-2 mt-4 mb-5 border-bottom">
-    <h2>Remoção de Usuário</h2>
+    <h2>Remoção de Funcionário</h2>
 </div>
 
-<h5 class="pb-2 mt-4 mb-5">Tem certeza que deseja remover o usuário @Model.Nome?</h5>
+<h5 class="pb-2 mt-4 mb-5">Tem certeza que deseja remover o funcionário @Model.Nome?</h5>
 <div>
     <dl class="row">
         <dt class = "col-sm-2">
@@ -24,10 +24,28 @@
             @Html.DisplayFor(model => model.Nome)
         </dd>
         <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Celular)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Celular)
+        </dd>
+        <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.Email)
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.Email)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.DataNascimento)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.DataNascimento)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Funcao)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Funcao)
         </dd>
     </dl>
     

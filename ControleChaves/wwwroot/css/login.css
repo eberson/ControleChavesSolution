@@ -50,4 +50,5 @@ input[type=password],
 input[type=email] {
     text-align: center;
     padding: 15px 32px;
+    display: inline-block;
 }

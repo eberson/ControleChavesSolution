@@ -13,6 +13,7 @@ namespace ControleChaves.Application.AutoMapper
         public DomainToViewModelMappingProfile()
         {
             CreateMap<Usuario, UsuarioViewModel>();
+            CreateMap<Funcionario, FuncionarioViewModel>();
             CreateMap<UsuarioViewModel, EditUsuarioViewModel>();
         }
     }
