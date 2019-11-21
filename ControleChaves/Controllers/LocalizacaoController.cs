@@ -13,13 +13,8 @@ namespace ControleChaves.Controllers
     public class LocalizacaoController : Controller
     {
         private readonly ILocalizacaoService _localizacaoService;
-        private readonly IMapper _mapper;
 
-        public LocalizacaoController(ILocalizacaoService localizacaoService, IMapper mapper)
-        {
-            _localizacaoService = localizacaoService;
-            _mapper = mapper;
-        }
+        public LocalizacaoController(ILocalizacaoService localizacaoService) => _localizacaoService = localizacaoService;
 
         [Authorize]
         public IActionResult Index()
@@ -43,7 +38,7 @@ namespace ControleChaves.Controllers
             var task = _localizacaoService.Create(vm);
 
             if (task.IsCompletedSuccessfully)
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", "Chave", new { id = task.Result.ID });
 
             if (task.IsFaulted)
             {
@@ -77,7 +72,7 @@ namespace ControleChaves.Controllers
             var task = _localizacaoService.Update(vm);
 
             if (task.IsCompletedSuccessfully)
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", "Chave", new { id = task.Result.ID });
 
             if (task.IsFaulted)
             {
@@ -116,6 +111,20 @@ namespace ControleChaves.Controllers
                 ModelState.AddModelError("ErrorSaving", "Erro ao remover o localização.");
             }
 
+            var vm = _localizacaoService.Find(id).Result;
+
+            if (vm == null)
+            {
+                return NotFound();
+            }
+
+            return View(vm);
+        }
+
+        [HttpGet]
+        [Authorize]
+        public IActionResult Details(int id)
+        {
             var vm = _localizacaoService.Find(id).Result;
 
             if (vm == null)

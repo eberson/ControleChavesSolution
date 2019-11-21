@@ -37,6 +37,7 @@ namespace ControleChaves
             services.AddScoped<IUsuarioService, UsuarioService>();
             services.AddScoped<IFuncionarioService, FuncionarioService>();
             services.AddScoped<ILocalizacaoService, LocalizacaoService>();
+            services.AddScoped<IChaveService, ChaveService>();
             services.AddAuthentication(options =>
             {
                 options.DefaultAuthenticateScheme = CookieAuthenticationDefaults.AuthenticationScheme;

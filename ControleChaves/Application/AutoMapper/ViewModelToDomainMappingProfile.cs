@@ -26,12 +26,12 @@ namespace ControleChaves.Application.AutoMapper
                 .ForMember(u => u.Status, opts => opts.NullSubstitute(Status.ATIVO));
 
             CreateMap<LocalizacaoViewModel, Localizacao>()
-                .ForMember(l => l.Status, opts => opts.NullSubstitute(Status.ATIVO));
+                .ForMember(l => l.Status, opts => opts.Ignore());
 
             CreateMap<ChaveViewModel, Chave>()
                 .ForMember(c => c.Localizacao, opts => opts.Ignore())
                 .ForMember(c => c.Movimentacoes, opts => opts.Ignore())
-                .ForMember(c => c.Status, opts => opts.NullSubstitute(Status.ATIVO));
+                .ForMember(c => c.Status, opts => opts.Ignore());
         }
     }
 }

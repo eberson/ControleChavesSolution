@@ -23,7 +23,7 @@ namespace ControleChaves.Application.Services
             _db = _context.Set<E>();
         }
 
-        public Task<VM> Find(K id)
+        public virtual Task<VM> Find(K id)
         {
             return Task.FromResult(_mapper.Map<VM>(_db.Find(id)));
         }
@@ -38,8 +38,8 @@ namespace ControleChaves.Application.Services
             return false;
         }
 
-        public Task<List<VM>> FindAll()
-        {   
+        public virtual Task<List<VM>> FindAll()
+        {
             var result = _db.AsEnumerable()
                 .Where(e => e is RemocaoLogica ? ((RemocaoLogica)e).IsActive() : true)
                 .AsQueryable()
@@ -49,7 +49,7 @@ namespace ControleChaves.Application.Services
             return Task.FromResult(result);
         }
 
-        public Task Remove(K id)
+        public virtual Task Remove(K id)
         {
             try
             {
@@ -58,7 +58,7 @@ namespace ControleChaves.Application.Services
                 if (element is RemocaoLogica)
                 {
                     ((RemocaoLogica)element).MarkAsRemoved();
-                } 
+                }
                 else
                 {
                     _db.Remove(element);
@@ -73,38 +73,35 @@ namespace ControleChaves.Application.Services
             }
         }
 
-        public Task Create(VM vm)
+        public virtual Task<VM> Create(VM vm)
         {
-            try
-            {
-                _db.Add(_mapper.Map<E>(vm));
-                _context.SaveChanges();
+            var e = Search(vm);
 
-                return Task.CompletedTask;
-            }
-            catch (Exception e)
+            if (e != null)
             {
-                return Task.FromException(e);
+                return Update(vm);
             }
 
+            e = _mapper.Map<E>(vm);
+            _db.Add(e);
+
+
+
+
+            _context.SaveChanges();
+
+            return Task.FromResult(_mapper.Map<VM>(e));
         }
 
-        public Task Update(VM vm)
+        public virtual Task<VM> Update(VM vm)
         {
-            try
-            {
-                var element = Search(vm);
+            var element = Search(vm);
 
-                Update(element, vm);
+            Update(element, vm);
 
-                _db.Update(element);
-                _context.SaveChanges();
-                return Task.CompletedTask;
-            }
-            catch (Exception e)
-            {
-                return Task.FromException(e);
-            }
+            _db.Update(element);
+            _context.SaveChanges();
+            return Task.FromResult(_mapper.Map<VM>(element));
         }
 
         protected abstract void Update(E element, VM vm);

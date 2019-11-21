@@ -25,6 +25,7 @@ namespace ControleChaves.Application.Services
         {
             element.Nome = vm.Nome;
             element.Email = vm.Email;
+            element.Status = Status.ATIVO;
         }
     }
 }

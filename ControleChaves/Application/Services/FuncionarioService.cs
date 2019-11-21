@@ -27,6 +27,7 @@ namespace ControleChaves.Application.Services
             element.DataNascimento = vm.DataNascimento;
             element.Funcao = vm.Funcao;
             element.Nome = vm.Nome;
+            element.Status = Status.ATIVO;
         }
     }
 }

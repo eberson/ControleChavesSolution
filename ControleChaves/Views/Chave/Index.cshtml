@@ -1,0 +1,50 @@
+﻿@model IEnumerable<ControleChaves.Models.ChaveViewModel>
+
+@{
+    ViewData["Title"] = "Chaves";
+}
+
+<div class="pb-2 mt-4 mb-5 border-bottom">
+    <h2>Chaves</h2>
+</div>
+
+<div>
+    <dl class="row">
+        <dt class="col-sm-2">
+            Localização
+        </dt>
+        <dd class="col-sm-10">
+            @ViewBag.Localizacao.Descricao
+        </dd>
+    </dl>
+</div>
+
+<p>
+    @Html.ActionLink("Nova Chave", "Create", new { id = @ViewBag.Localizacao.ID }, new { @class = "btn btn-primary" })
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Numero)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Numero)
+            </td>
+            <td>
+                @Html.ActionLink("Remover", "Delete", new { id=item.Numero }, new { @class = "btn btn-danger" })
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+
+<p>
+    @Html.ActionLink("Finalizar", "Index", "Localizacao", new { id = @ViewBag.Localizacao.ID }, new { @class = "btn btn-primary" })
+</p>

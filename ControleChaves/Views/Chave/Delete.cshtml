@@ -1,0 +1,17 @@
+﻿@model ControleChaves.Models.ChaveViewModel
+
+@{
+    ViewData["Title"] = "Remoção de Chave";
+}
+
+<div class="pb-2 mt-4 mb-5 border-bottom">
+    <h2>Remoção de Chave</h2>
+</div>
+
+<h5 class="pb-2 mt-4 mb-5">Tem certeza que deseja remover o usuário @Model.Numero?</h5>
+<div>
+    <form asp-action="Delete">
+        <input type="submit" value="Remover" class="btn btn-danger" /> |
+        <a asp-action="Index">Voltar à Listagem</a>
+    </form>
+</div>

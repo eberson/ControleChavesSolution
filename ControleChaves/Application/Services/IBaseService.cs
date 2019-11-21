@@ -7,9 +7,9 @@ namespace ControleChaves.Application.Services
 {
     public interface IBaseService<VM, K>
     {
-        Task Create(VM vm);
+        Task<VM> Create(VM vm);
 
-        Task Update(VM vm);
+        Task<VM> Update(VM vm);
 
         Task Remove(K id);
 

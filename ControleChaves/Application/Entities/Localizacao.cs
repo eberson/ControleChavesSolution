@@ -10,7 +10,7 @@ namespace ControleChaves.Application.Entities
         public int ID { get; set; }
         public string Descricao { get; set; }
         public Status Status { get; set; }
-        public virtual ICollection<Chave> Chaves { get; set; }
+        public virtual List<Chave> Chaves { get; set; }
         public bool IsActive()
         {
             return Status == Status.ATIVO;

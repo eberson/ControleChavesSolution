@@ -1,0 +1,66 @@
+﻿@model ControleChaves.Models.LocalizacaoViewModel
+
+@{
+    ViewData["Title"] = "Detalhes da Localização";
+}
+
+<div class="pb-2 mt-4 mb-5 border-bottom">
+    <h2>Detalhes da Localização</h2>
+</div>
+
+<div>
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.ID)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.ID)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Descricao)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Descricao)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Status)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Status)
+        </dd>
+    </dl>
+    <dl class="row">
+        <h4>Chaves da Localização</h4>
+    </dl>
+    <dl class="row">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        Número
+                    </th>
+                    <th>
+                        Status
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.Chaves)
+                {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Numero)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Status)
+                    </td>
+                </tr>
+                }
+            </tbody>
+        </table>
+    </dl>
+</div>
+<div>
+    @Html.ActionLink("Editar", "Edit", new { id = Model.ID }, new { @class = "btn btn-secondary" }) |
+    <a asp-action="Index">Voltar à Listagem</a>
+</div>

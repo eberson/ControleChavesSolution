@@ -14,8 +14,14 @@ namespace ControleChaves.Application.AutoMapper
         {
             CreateMap<Usuario, UsuarioViewModel>();
             CreateMap<Funcionario, FuncionarioViewModel>();
-            CreateMap<Localizacao, LocalizacaoViewModel>();
-            CreateMap<Chave, ChaveViewModel>();
+
+            CreateMap<Localizacao, LocalizacaoViewModel>()
+                .ForMember(vm => vm.Status, opts => opts.MapFrom(src => src.Status.ToString()));
+
+            CreateMap<Chave, ChaveViewModel>()
+                .ForMember(vm => vm.LocalizacaoID, opts => opts.MapFrom(src => src.Localizacao.ID))
+                .ForMember(vm => vm.Status, opts => opts.MapFrom(src => src.Status.ToString()));
+
             CreateMap<UsuarioViewModel, EditUsuarioViewModel>();
         }
     }
