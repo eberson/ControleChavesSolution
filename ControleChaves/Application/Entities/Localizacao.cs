@@ -5,10 +5,20 @@ using System.Threading.Tasks;
 
 namespace ControleChaves.Application.Entities
 {
-    public class Localizacao
+    public class Localizacao : RemocaoLogica
     {
         public int ID { get; set; }
         public string Descricao { get; set; }
+        public Status Status { get; set; }
         public virtual ICollection<Chave> Chaves { get; set; }
+        public bool IsActive()
+        {
+            return Status == Status.ATIVO;
+        }
+
+        public void MarkAsRemoved()
+        {
+            Status = Status.INATIVO;
+        }
     }
 }

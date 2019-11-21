@@ -14,6 +14,8 @@ namespace ControleChaves.Application.AutoMapper
         {
             CreateMap<Usuario, UsuarioViewModel>();
             CreateMap<Funcionario, FuncionarioViewModel>();
+            CreateMap<Localizacao, LocalizacaoViewModel>();
+            CreateMap<Chave, ChaveViewModel>();
             CreateMap<UsuarioViewModel, EditUsuarioViewModel>();
         }
     }

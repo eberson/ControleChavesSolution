@@ -31,6 +31,7 @@ namespace ControleChaves.Application.Database
                 u.Property(e => e.Nome).IsRequired();
                 u.Property(e => e.Email).IsRequired();
                 u.Property(e => e.Senha).IsRequired();
+                u.Property(e => e.Status).HasDefaultValue(Status.ATIVO);
             });
 
             modelBuilder.Entity<Funcionario>(f =>
@@ -40,6 +41,7 @@ namespace ControleChaves.Application.Database
                 f.Property(e => e.Nome).IsRequired();
                 f.Property(e => e.Celular).IsRequired();
                 f.Property(e => e.Email).IsRequired();
+                f.Property(e => e.Status).HasDefaultValue(Status.ATIVO);
             });
 
             modelBuilder.Entity<Localizacao>(l =>
@@ -47,13 +49,14 @@ namespace ControleChaves.Application.Database
                 l.HasKey(e => e.ID);
                 l.Property(e => e.ID).ValueGeneratedOnAdd();
                 l.Property(e => e.Descricao).IsRequired();
+                l.Property(e => e.Status).HasDefaultValue(Status.ATIVO);
             });
 
             modelBuilder.Entity<Chave>(c =>
             {
                 c.HasKey(e => e.Numero);
-                c.Property(e => e.Numero).ValueGeneratedOnAdd();
-                c.HasOne(e => e.Localizacao).WithMany(l => l.Chaves);
+                c.HasOne(e => e.Localizacao).WithMany(l => l.Chaves).IsRequired();
+                c.Property(e => e.Status).HasDefaultValue(Status.ATIVO);
             });
 
             modelBuilder.Entity<Controle>(c =>

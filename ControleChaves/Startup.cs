@@ -13,6 +13,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using AutoMapper;
 using ControleChaves.Application.AutoMapper;
+using ControleChaves.Application.Entities;
 
 namespace ControleChaves
 {
@@ -35,6 +36,7 @@ namespace ControleChaves
             services.AddTransient<IUserService, UserService>();
             services.AddScoped<IUsuarioService, UsuarioService>();
             services.AddScoped<IFuncionarioService, FuncionarioService>();
+            services.AddScoped<ILocalizacaoService, LocalizacaoService>();
             services.AddAuthentication(options =>
             {
                 options.DefaultAuthenticateScheme = CookieAuthenticationDefaults.AuthenticationScheme;
@@ -58,6 +60,19 @@ namespace ControleChaves
                 using (var context = serviceScope.ServiceProvider.GetService<ControleChavesContext>())
                 {
                     context.Database.EnsureCreated();
+
+                    if (context.Usuarios.Count() == 0)
+                    {
+                        context.Usuarios.Add(new Usuario() 
+                        {
+                            Email = "root@root.com",
+                            Nome = "Administrador",
+                            Senha = "123456",
+                            Status = Status.ATIVO,
+                        });
+
+                        context.SaveChanges();
+                    }
                 }
             }
         }

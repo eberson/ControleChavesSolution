@@ -16,7 +16,7 @@ namespace ControleChaves.Application.Services
 
         public Task<(bool, Usuario)> ValidateUserCredentialsAsync(string username, string password)
         {
-            var user = _context.Usuarios.ToList().Find(u => u.Email == username && u.Senha == password);
+            var user = _context.Usuarios.Where(u => u.Email == username && u.Senha == password && u.Status == Status.ATIVO).FirstOrDefault();
             var result = (user != null, user);
 
             return Task.FromResult(result);

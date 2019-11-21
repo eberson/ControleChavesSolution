@@ -27,7 +27,7 @@ namespace ControleChaves.Models
         [DisplayName("E-mail")]
         public string Email { get; set; }
 
-        [DataType(DataType.Date)]
+        [DataType(DataType.Date, ErrorMessage = "A data informada está vazia ou não é válida")]
         [DisplayName("Data de Nascimento")]
         public DateTime DataNascimento { get; set; }
 

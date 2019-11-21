@@ -1,0 +1,44 @@
+﻿@model IEnumerable<ControleChaves.Models.LocalizacaoViewModel>
+
+@{
+    ViewData["Title"] = "Localizações";
+}
+
+<div class="pb-2 mt-4 mb-5 border-bottom">
+    <h2>Localizações</h2>
+</div>
+
+<p>
+    <a class="btn btn-primary" asp-action="Create">Nova Localização</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Descricao)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Descricao)
+                </td>
+                <td>
+                    @Html.ActionLink("Editar", "Edit", new { id = item.ID }, new { @class = "btn btn-secondary" }) |
+                    @Html.ActionLink("Detalhes", "Details", new { id = item.ID }, new { @class = "btn btn-secondary" }) |
+                    @Html.ActionLink("Remover", "Delete", new { id = item.ID }, new { @class = "btn btn-danger" })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

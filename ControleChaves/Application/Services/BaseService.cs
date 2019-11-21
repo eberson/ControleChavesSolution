@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using ControleChaves.Application.Database;
+using ControleChaves.Application.Entities;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -27,9 +28,24 @@ namespace ControleChaves.Application.Services
             return Task.FromResult(_mapper.Map<VM>(_db.Find(id)));
         }
 
-        public Task<List<VM>> FindAll()
+        protected bool ShouldAvoid(E element)
         {
-            var result = _db.ProjectTo<VM>(_mapper.ConfigurationProvider).ToList();
+            if (element is RemocaoLogica)
+            {
+                return !((RemocaoLogica)element).IsActive();
+            }
+
+            return false;
+        }
+
+        public Task<List<VM>> FindAll()
+        {   
+            var result = _db.AsEnumerable()
+                .Where(e => e is RemocaoLogica ? ((RemocaoLogica)e).IsActive() : true)
+                .AsQueryable()
+                .ProjectTo<VM>(_mapper.ConfigurationProvider)
+                .ToList();
+
             return Task.FromResult(result);
         }
 
@@ -39,7 +55,15 @@ namespace ControleChaves.Application.Services
             {
                 var element = _db.Find(id);
 
-                _db.Remove(element);
+                if (element is RemocaoLogica)
+                {
+                    ((RemocaoLogica)element).MarkAsRemoved();
+                } 
+                else
+                {
+                    _db.Remove(element);
+                }
+
                 _context.SaveChanges();
                 return Task.CompletedTask;
             }
@@ -81,7 +105,6 @@ namespace ControleChaves.Application.Services
             {
                 return Task.FromException(e);
             }
-
         }
 
         protected abstract void Update(E element, VM vm);
