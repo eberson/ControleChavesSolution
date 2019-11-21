@@ -30,6 +30,9 @@ namespace ControleChaves
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+
+            services.RegisterMappings();
+
             services.AddDbContext<ControleChavesContext>();
 
             services.AddSingleton(Configuration);
@@ -45,11 +48,11 @@ namespace ControleChaves
                 options.DefaultChallengeScheme = CookieAuthenticationDefaults.AuthenticationScheme;
             }).AddCookie(options =>
             {
+                options.ExpireTimeSpan = TimeSpan.FromMinutes(10);
                 options.LoginPath = "/auth/login";
                 options.LogoutPath = "/auth/logout";
+                options.SlidingExpiration = true;
             });
-
-            services.RegisterMappings();
         }
 
         private static void UpdateDatabase(IApplicationBuilder app)
