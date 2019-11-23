@@ -1,8 +1,57 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
+﻿@model IEnumerable<ControleChaves.Models.ControleViewModel>
+
+@{
+    ViewData["Title"] = "Home";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="pb-2 mt-4 mb-5 border-bottom">
+    <h2>Home</h2>
 </div>
+
+<p>
+    <a class="btn btn-primary" asp-action="Create">Novo Empréstimo</a>
+</p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Codigo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Retirada)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FuncionarioRetirada.Nome)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Devolucao)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Codigo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Retirada)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FuncionarioRetirada.Nome)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Devolucao)
+            </td>
+            <td>
+                @Html.ActionLink("Devolução", "Edit", new { id = item.Codigo }, new { @class = "btn btn-info" }) |
+                @Html.ActionLink("Alerta", "Details", new { id = item.Codigo }, new { @class = "btn btn-warning" }) |
+                @Html.ActionLink("Remover", "Delete", new { id = item.Codigo }, new { @class = "btn btn-danger" })
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>

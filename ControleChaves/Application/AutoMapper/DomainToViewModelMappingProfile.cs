@@ -23,6 +23,8 @@ namespace ControleChaves.Application.AutoMapper
                 .ForMember(vm => vm.Status, opts => opts.MapFrom(src => src.Status.ToString()));
 
             CreateMap<UsuarioViewModel, EditUsuarioViewModel>();
+
+            CreateMap<Controle, ControleViewModel>();
         }
     }
 }

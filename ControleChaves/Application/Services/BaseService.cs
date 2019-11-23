@@ -86,8 +86,6 @@ namespace ControleChaves.Application.Services
             _db.Add(e);
 
 
-
-
             _context.SaveChanges();
 
             return Task.FromResult(_mapper.Map<VM>(e));

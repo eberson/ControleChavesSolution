@@ -14,6 +14,7 @@ using Microsoft.Extensions.Hosting;
 using AutoMapper;
 using ControleChaves.Application.AutoMapper;
 using ControleChaves.Application.Entities;
+using Microsoft.AspNetCore.Http;
 
 namespace ControleChaves
 {
@@ -31,6 +32,8 @@ namespace ControleChaves
         {
             services.AddControllersWithViews();
 
+            services.AddTransient<IHttpContextAccessor, HttpContextAccessor>();
+
             services.RegisterMappings();
 
             services.AddDbContext<ControleChavesContext>();
@@ -41,6 +44,7 @@ namespace ControleChaves
             services.AddScoped<IFuncionarioService, FuncionarioService>();
             services.AddScoped<ILocalizacaoService, LocalizacaoService>();
             services.AddScoped<IChaveService, ChaveService>();
+            services.AddScoped<IControleService, ControleService>();
             services.AddAuthentication(options =>
             {
                 options.DefaultAuthenticateScheme = CookieAuthenticationDefaults.AuthenticationScheme;
