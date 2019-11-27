@@ -75,5 +75,26 @@ namespace ControleChaves.Application.Services
             _context.SaveChanges();
             return Task.FromResult(_mapper.Map<ChaveViewModel>(element));
         }
+
+        public Task<List<ChaveMovimentacaoViewModel>> FindAvailable()
+        {
+            var emprestadas = _context.Controles.Include(m => m.Chave)
+                .AsEnumerable()
+                .Where(m => m.Devolucao == default(DateTime))
+                .Select(m => m.Chave)
+                .ToList();
+
+            var result = _db.Include(e => e.Localizacao)
+               .AsEnumerable()
+               .Where(c => c.IsActive() && !emprestadas.Any(e => e.Numero == c.Numero))
+               .Select(m => new ChaveMovimentacaoViewModel
+               {
+                   ID = m.Numero,
+                   Nome = m.Localizacao.Descricao
+               })
+               .ToList();
+
+            return Task.FromResult(result);
+        }
     }
 }

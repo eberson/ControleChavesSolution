@@ -9,5 +9,7 @@ namespace ControleChaves.Application.Services
     public interface IChaveService : IBaseService<ChaveViewModel, string>
     {
         Task<List<ChaveViewModel>> FindAll(int localizacaoID);
+
+        Task<List<ChaveMovimentacaoViewModel>> FindAvailable();
     }
 }

@@ -1,0 +1,38 @@
+﻿<div class="modal-content">
+    <div class="modal-header">
+        <h5 class="modal-title">Devolução de Chave</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <form id="formDevolucao" method="post" action="">
+        <div class="modal-body">
+            <div class="row">
+                <div class="col-md-12">
+
+                    <div id="msg" class="alert alert-danger" role="alert" style="display: none;"></div>
+
+                    <div class="form-group">
+                        <input type="text" id="chave" class="form-control" value="@ViewBag.Controle.Chave.Numero" readonly />
+                        <input type="hidden" id="hiddenChaveDevolucao" value="@ViewBag.Controle.Chave.Numero" />
+                        <span class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <input type="text" id="funcionarioDevolucao" class="form-control" placeholder="Quem devolveu?" required />
+                        <input type="hidden" id="hiddenEmployeeDevolucao" />
+                        <span class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <input type="datetime-local" id="dataDevolucao" class="form-control" required />
+                        <span class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <input id="devolver" type="submit" value="Devolver" class="btn btn-primary" />
+        </div>
+    </form>
+</div>

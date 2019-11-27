@@ -4,15 +4,22 @@
     ViewData["Title"] = "Home";
 }
 
+@section Scripts
+{
+    <script src="~/js/popper.min.js" asp-append-version="true"></script>
+    <script src="~/js/bootstrap3-typeahead.min.js" asp-append-version="true"></script>
+    <script src="~/js/home.js" asp-append-version="true"></script>
+}
+
 <div class="pb-2 mt-4 mb-5 border-bottom">
     <h2>Home</h2>
 </div>
 
 <p>
-    <a class="btn btn-primary" asp-action="Create">Novo Empréstimo</a>
+    <a class="btn btn-primary" id="novoEmprestimo">Novo Empréstimo</a>
 </p>
 
-<table class="table">
+<table id="emprestimos" class="table">
     <thead>
         <tr>
             <th>
@@ -25,33 +32,23 @@
                 @Html.DisplayNameFor(model => model.FuncionarioRetirada.Nome)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Devolucao)
+                @Html.DisplayNameFor(model => model.UsuarioRetirada.Nome)
             </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in Model)
-        {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Codigo)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Retirada)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FuncionarioRetirada.Nome)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Devolucao)
-            </td>
-            <td>
-                @Html.ActionLink("Devolução", "Edit", new { id = item.Codigo }, new { @class = "btn btn-info" }) |
-                @Html.ActionLink("Alerta", "Details", new { id = item.Codigo }, new { @class = "btn btn-warning" }) |
-                @Html.ActionLink("Remover", "Delete", new { id = item.Codigo }, new { @class = "btn btn-danger" })
-            </td>
-        </tr>
-        }
     </tbody>
 </table>
+
+<div id="modalNovoEmprestimo" class="modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+
+    </div>
+</div>
+
+<div id="modalNovaDevolucao" class="modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+
+    </div>
+</div>

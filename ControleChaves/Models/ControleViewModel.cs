@@ -25,6 +25,8 @@ namespace ControleChaves.Models
         [DisplayName("Usuário da Retirada")]
         public FuncionarioViewModel FuncionarioRetirada { get; set; }
 
+        public UsuarioViewModel UsuarioRetirada { get; set; }
+
         [DisplayName("Usuário da Devolução")]
         public FuncionarioViewModel FuncionarioDevolucao { get; set; }
 

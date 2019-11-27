@@ -25,7 +25,7 @@ namespace ControleChaves.Controllers
         [Authorize]
         public IActionResult Index()
         {
-            return View(_controleService.FindAll(DateTime.Now).Result);
+            return View();
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

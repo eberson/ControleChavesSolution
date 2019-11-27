@@ -1,0 +1,40 @@
+﻿@model ControleChaves.Models.EmprestimoViewModel
+
+<div class="modal-content">
+    <div class="modal-header">
+        <h5 class="modal-title">Retirada de Chave</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <form id="formEmprestimo" method="post" action="">
+        <div class="modal-body">
+            <div class="row">
+                <div class="col-md-12">
+
+                    <div id="msg" class="alert alert-danger" role="alert" style="display: none;"></div>
+
+                    <div class="form-group">
+                        <input type="text" id="chave" class="form-control" placeholder="Chave retirada" required />
+                        <input type="hidden" id="hiddenChave" />
+                        <span class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <input type="text" id="funcionarioRetirada" class="form-control" placeholder="Quem retirou?" required />
+                        <input type="hidden" id="hiddenEmployee" />
+                        <span class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <input type="datetime-local" id="data" class="form-control" required />
+                        <span class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <input id="emprestar" type="submit" value="Emprestar" class="btn btn-primary" />
+        </div>
+    </form>
+</div>

@@ -32,14 +32,6 @@ namespace ControleChaves.Application.AutoMapper
                 .ForMember(c => c.Localizacao, opts => opts.Ignore())
                 .ForMember(c => c.Movimentacoes, opts => opts.Ignore())
                 .ForMember(c => c.Status, opts => opts.Ignore());
-
-            CreateMap<EmprestimoViewModel, Controle>()
-                .ForMember(c => c.UsuarioDevolucao, opts => opts.Ignore())
-                .ForMember(c => c.FuncionarioDevolucao, opts => opts.Ignore())
-                .ForMember(c => c.Devolucao, opts => opts.Ignore())
-                .ForMember(c => c.Codigo, opts => opts.Ignore())
-                .ForMember(c => c.Retirada, opts => opts.MapFrom(src => src.Data))
-                .ForMember(c => c.FuncionarioRetirada, opts => opts.MapFrom(src => src.Funcionario));
         }
     }
 }

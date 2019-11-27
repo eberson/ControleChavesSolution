@@ -19,7 +19,7 @@ a {
 }
 
 .btn-primary {
-    color: #fff;
+    color: #fff !important;
     background-color: #017C79;
     border-color: #017C79;
     border: none;
@@ -76,7 +76,7 @@ select {
 input[type=button], input[type=submit], input[type=reset] {
     background-color: #017C79;
     border: none;
-    color: white;
+    color: white !important;
     padding: 15px 80px;
     text-align: center;
     text-decoration: none;
@@ -112,6 +112,7 @@ input[type=number],
 input[type=password],
 input[type=email],
 input[type=date],
+input[type=datetime-local],
 select {
     background-color: #f6f6f6;
     border: none;
@@ -135,7 +136,8 @@ input[type=number]:focus,
 input[type=password]:focus,
 input[type=email]:focus,
 input[type=date]:focus,
-select:focus{
+input[type=datetime-local]:focus,
+select:focus {
     background-color: #fff;
     border-bottom: 2px solid #017C79;
 }
@@ -145,7 +147,8 @@ input[type=number]:placeholder,
 input[type=password]:placeholder,
 input[type=email]:placeholder,
 input[type=date]:placeholder,
-select:placeholder{
+input[type=datetime-local]:placeholder,
+select:placeholder {
     color: #cccccc;
 }
 

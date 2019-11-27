@@ -20,6 +20,6 @@ namespace ControleChaves.Models
 
         [Required(ErrorMessage = "O usuário que devolveu a chave é obrigatório")]
         [DisplayName("Usuário da Devolução")]
-        public FuncionarioViewModel Funcionario { get; set; }
+        public int FuncionarioID { get; set; }
     }
 }

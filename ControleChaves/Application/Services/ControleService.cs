@@ -103,7 +103,7 @@ namespace ControleChaves.Application.Services
                 .Include(c => c.UsuarioDevolucao)
                 .Include(c => c.UsuarioRetirada)
                 .Include(c => c.Chave)
-                .Where(c => c.Retirada.Date == when.Date && c.Devolucao == null)
+                .Where(c => c.Retirada.Date == when.Date && c.Devolucao == default(DateTime))
                 .ProjectTo<ControleViewModel>(_mapper.ConfigurationProvider)
                 .ToList();
 
@@ -114,7 +114,7 @@ namespace ControleChaves.Application.Services
         {
             var controle = _context.Controles.Find(vm.Codigo);
 
-            controle.FuncionarioDevolucao = _mapper.Map<Funcionario>(vm.Funcionario);
+            controle.FuncionarioDevolucao = _context.Funcionarios.Find(vm.FuncionarioID);
             controle.UsuarioDevolucao = CurrentUser;
             controle.Devolucao = vm.Data;
 
@@ -126,9 +126,13 @@ namespace ControleChaves.Application.Services
 
         public Task<ControleViewModel> Lend(EmprestimoViewModel vm)
         {
-            var controle = _mapper.Map<Controle>(vm);
-
-            controle.UsuarioRetirada = CurrentUser;
+            var controle = new Controle
+            {
+                Chave = _context.Chaves.Find(vm.ChaveID),
+                FuncionarioRetirada = _context.Funcionarios.Find(vm.FuncionarioID),
+                Retirada = vm.Data,
+                UsuarioRetirada = CurrentUser
+            };
 
             _context.Controles.Add(controle);
             _context.SaveChanges();
