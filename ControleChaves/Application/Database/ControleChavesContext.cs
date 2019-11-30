@@ -56,6 +56,7 @@ namespace ControleChaves.Application.Database
             {
                 c.HasKey(e => e.Numero);
                 c.HasOne(e => e.Localizacao).WithMany(l => l.Chaves).IsRequired();
+                c.Property(e => e.Numero).HasMaxLength(20);
                 c.Property(e => e.Status).HasDefaultValue(Status.ATIVO);
             });
 

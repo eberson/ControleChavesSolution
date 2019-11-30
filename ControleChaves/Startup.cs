@@ -81,6 +81,8 @@ namespace ControleChaves
 
                         context.SaveChanges();
                     }
+
+                    context.Seed();
                 }
             }
         }
